@@ -1,0 +1,9 @@
+**/.kitchen
+**/imagerc*
+**/*.html
+**/real_identity/**
+**/dummy_work/**
+
+ide/work/bats/
+bats-support/
+bats-assert/
