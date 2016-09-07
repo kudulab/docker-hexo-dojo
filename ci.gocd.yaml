@@ -15,19 +15,19 @@ pipelines:
                 - docker
                 - small
               tasks:
-                - script: ide "chef exec bundle install && chef exec bundle exec rake go:git:destructive_validate_repo"
+                - script: ide "bundle install && bundle exec rake go:git:destructive_validate_repo"
             repocritic:
               resources:
                 - docker
                 - small
               tasks:
-                - script: ide "chef exec bundle install && chef exec bundle exec rake go:style:repocritic"
+                - script: ide "bundle install && bundle exec rake go:style:repocritic"
             itest_configs:
               resources:
                 - docker
                 - small
               tasks:
-                - script: ide "chef exec bundle install && chef exec bundle exec rake build_configs_image && chef exec bundle exec rake test_ide_configs"
+                - script: ide "bundle install && bundle exec rake build_configs_image && bundle exec rake test_ide_configs"
       - build:
           clean_workspace: true
           jobs:
@@ -40,7 +40,7 @@ pipelines:
                     source: image/imagerc
                     destination:
               tasks:
-                - script: ide "chef exec bundle install && chef exec bundle exec rake build_configs_image && chef exec bundle exec rake build"
+                - script: ide "bundle install && bundle exec rake build_configs_image && bundle exec rake build"
       - itest:
           clean_workspace: true
           jobs:
@@ -55,7 +55,7 @@ pipelines:
                     is_file: yes
                     source: imagerc
                     destination: image/
-                - script: ide ". ./image/imagerc && chef exec bundle install && chef exec bundle exec rake kitchen"
+                - script: ide ". ./image/imagerc && bundle install && bundle exec rake kitchen"
             end_user:
               resources:
                 - docker
@@ -67,7 +67,7 @@ pipelines:
                     is_file: yes
                     source: imagerc
                     destination: image/
-                - script: ide ". ./image/imagerc && chef exec bundle install && chef exec bundle exec rake install_ide && chef exec bundle exec rake install_bats && chef exec bundle exec rake end_user"
+                - script: ide ". ./image/imagerc && bundle install && bundle exec rake install_ide && bundle exec rake install_bats && bundle exec rake end_user"
       - release:
           clean_workspace: true
           jobs:
@@ -76,7 +76,7 @@ pipelines:
                 - docker
                 - small
               tasks:
-                - script: ide "chef exec bundle install && chef exec bundle exec rake go:release:code"
+                - script: ide "bundle install && bundle exec rake go:release:code"
       - publish:
           clean_workspace: true
           jobs:
@@ -92,4 +92,4 @@ pipelines:
                     source: imagerc
                     destination: image/
                 # imagerc file is sourced by dockerimagerake
-                - script: ide "chef exec bundle install && chef exec bundle exec rake go:publish:image"
+                - script: ide "bundle install && bundle exec rake go:publish:image"

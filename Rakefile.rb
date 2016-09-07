@@ -90,7 +90,7 @@ task :end_user do
   test_dir = File.expand_path("#{File.dirname(__FILE__)}/test/")
   test_ide_work = File.expand_path("#{test_dir}/integration/end_user/test_ide_work")
   begin
-  Rake.sh(". #{image_dir}/imagerc && echo "\
+    Rake.sh(". #{image_dir}/imagerc && echo "\
     "\"IDE_DRIVER=docker
 IDE_DOCKER_IMAGE=\\\"${AIT_DOCKER_IMAGE_NAME}:${AIT_DOCKER_IMAGE_TAG}\\\"
 IDE_IDENTITY=\\\"#{test_dir}/integration/identities/full\\\"\" > "\
