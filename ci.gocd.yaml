@@ -1,10 +1,10 @@
 pipelines:
-  docker-rubyide:
-    group: lab
+  docker-hexoide:
+    group: blog
     label_template: "${git[:8]}"
     materials:
       git:
-        git: "git@git.ai-traders.com:ruby/docker-hexoide.git"
+        git: "git@git.ai-traders.com:blog/docker-hexoide.git"
         branch: ci
     stages:
       - style_unit:
