@@ -13,3 +13,6 @@ source 'http://gems.ai-traders.com/' do
   gem 'gitrake'
   gem 'dockerimagerake'
 end
+
+# to avoid Gem::InstallError: buff-extensions requires Ruby version >= 2.2.0
+gem 'buff-extensions', '<2.0.0'

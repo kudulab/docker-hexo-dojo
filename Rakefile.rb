@@ -42,8 +42,11 @@ task :test_ide_configs do
   )
   kitchen_config.instances.each do |instance|
     instance.create()
-    Rake.sh("kitchen exec #{instance.name} -c \"bats /tmp/bats\"")
-    instance.destroy()
+    begin
+      Rake.sh("kitchen exec #{instance.name} -c \"bats /tmp/bats\"")
+    ensure
+      instance.destroy()
+    end
   end
 end
 # To test 1 instance:
