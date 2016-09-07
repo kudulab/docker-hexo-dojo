@@ -100,3 +100,9 @@ Here `.kitchen.image.yml` is used.
  * provide docker image build rake task
  * provide release and publish rake tasks
 Those rake tasks are used in `ci.gocd.yaml` file.
+
+### TODO
+Avoid using Chefide. Create a private ideide with AI-Traders:
+ * rubygems cache
+ * gems preinstalled
+ * docker-registry and mirror configured
