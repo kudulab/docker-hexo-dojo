@@ -66,22 +66,42 @@ task build: [:save_version]
 
 desc 'Run Test-Kitchen tests on built image'
 task :kitchen do
-  Rake.sh(". #{image_dir}/imagerc && export KITCHEN_YAML='#{File.dirname(__FILE__)}/.kitchen.image.yml' && kitchen converge default-docker-image && kitchen exec default-docker-image -c \"bats /tmp/bats\" && kitchen destroy default-docker-image")
+  begin
+    Rake.sh(". #{image_dir}/imagerc && export KITCHEN_YAML='#{File.dirname(__FILE__)}/.kitchen.image.yml' && kitchen converge default-docker-image && kitchen exec default-docker-image -c \"bats /tmp/bats\" && kitchen destroy default-docker-image")
+  ensure
+    Rake.sh(". #{image_dir}/imagerc && export KITCHEN_YAML='#{File.dirname(__FILE__)}/.kitchen.image.yml' && kitchen destroy")
+  end
 end
 
 task :install_ide do
   Rake.sh('sudo bash -c "`curl -L https://raw.githubusercontent.com/ai-traders/ide/0.5.0/install.sh`"')
 end
-
+task :install_bats do
+  Rake.sh('git clone --depth 1 https://github.com/sstephenson/bats.git && \
+    git clone --depth 1 https://github.com/ztombol/bats-support.git && \
+    git clone --depth 1 https://github.com/ztombol/bats-assert.git && \
+    sudo ./bats/install.sh /usr/local')
+end
 desc 'Run end user tests'
-RSpec::Core::RakeTask.new(:end_user) do |t|
-  # env variables like AIT_DOCKER_IMAGE_NAME are set by dockerimagerake gem
-  t.rspec_opts = [].tap do |a|
-    a.push('--pattern test/integration/end_user/spec/**/*_spec.rb')
-    a.push('--color')
-    a.push('--tty')
-    a.push('--format documentation')
-    a.push('--format h')
-    a.push('--out ./rspec.html')
-  end.join(' ')
+task :end_user do
+  if !File.file?("#{image_dir}/imagerc")
+    fail "#{image_dir}/imagerc does not exist"
+  end
+  test_dir = File.expand_path("#{File.dirname(__FILE__)}/test/")
+  test_ide_work = File.expand_path("#{test_dir}/integration/end_user/test_ide_work")
+  begin
+  Rake.sh(". #{image_dir}/imagerc && echo "\
+    "\"IDE_DRIVER=docker
+IDE_DOCKER_IMAGE=\\\"${AIT_DOCKER_IMAGE_NAME}:${AIT_DOCKER_IMAGE_TAG}\\\"
+IDE_IDENTITY=\\\"#{test_dir}/integration/identities/full\\\"\" > "\
+    "#{test_ide_work}/Idefile && "\
+    "echo \"IDE_DRIVER=docker
+IDE_DOCKER_IMAGE=\\\"${AIT_DOCKER_IMAGE_NAME}:${AIT_DOCKER_IMAGE_TAG}\\\"
+IDE_IDENTITY=\\\"#{test_dir}/integration/identities/no_id_rsa\\\"\" > "\
+    "#{test_ide_work}/NoIdRsaIdefile && "\
+    "bats #{test_dir}/integration/end_user/bats")
+  ensure
+    FileUtils.rm("#{test_ide_work}/Idefile")
+    FileUtils.rm("#{test_ide_work}/NoIdRsaIdefile")
+  end
 end

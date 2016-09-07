@@ -67,7 +67,7 @@ pipelines:
                     is_file: yes
                     source: imagerc
                     destination: image/
-                - script: ide ". ./image/imagerc && chef exec bundle install && chef exec bundle exec rake install_ide && chef exec bundle exec rake end_user"
+                - script: ide ". ./image/imagerc && chef exec bundle install && chef exec bundle exec rake install_ide && chef exec bundle exec rake install_bats && chef exec bundle exec rake end_user"
       - release:
           clean_workspace: true
           jobs:

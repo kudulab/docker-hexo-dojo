@@ -9,10 +9,13 @@
 ```
 IDE_DOCKER_IMAGE="hexoide:0.1.0"
 ```
-3. Run, example command:
+3. Run, example commands:
 ```bash
 ide
-# TODO: more
+ide hexo --version
+ide hexo init
+ide hexo generate
+ide hexo deploy
 ```
 
 By default, current directory in docker container is `/ide/work`.
