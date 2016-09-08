@@ -7,7 +7,7 @@
 1. Install [IDE](https://github.com/ai-traders/ide)
 2. Provide an Idefile:
 ```
-IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/hexoide:0.1.0"
+IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/hexoide:latest"
 ```
 3. Run, example commands:
 ```bash
@@ -22,7 +22,7 @@ By default, current directory in docker container is `/ide/work`.
 
 If you want to run this docker image without IDE entrypoint, run e.g.
 ```bash
-docker run -ti --rm --entrypoint=/bin/bash docker-registry.ai-traders.com/hexoide:0.1.0 -c "/bin/bash"
+docker run -ti --rm --entrypoint=/bin/bash docker-registry.ai-traders.com/hexoide:latest -c "/bin/bash"
 ```
 
 ### Configuration
@@ -111,5 +111,3 @@ Those rake tasks are used in `ci.gocd.yaml` file.
  * rubygems cache
  * gems preinstalled
  * docker-registry and mirror configured
-2. We could get `package.json` file from `hexo-blog` git project from gitlab,
- once it is setup in use it when build hexoide docker image.

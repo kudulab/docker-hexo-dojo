@@ -62,7 +62,10 @@ opts = DockerImageRake::Options.new(
   image_name: 'docker-registry.ai-traders.com/hexoide',
   dry_run: false)
 DockerImageRake::DockerImage.new(opts)
-task build: [:save_version]
+task :get_package_json do
+  Rake.sh('curl -L http://gitlab.ai-traders.com/blog/hexo-blog/raw/master/package.json > image/package.json')
+end
+task build: [:save_version, :get_package_json]
 
 desc 'Run Test-Kitchen tests on built image'
 task :kitchen do
