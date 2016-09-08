@@ -36,9 +36,9 @@ test_ide_work="/ide/work/test/integration/end_user/test_ide_work"
 }
 @test "when full identity: hexo is installed" {
   cd ${test_ide_work}
-  run ide "hexo --version"
+  run ide "npm exec hexo --version"
   assert_equal "$status" 0
-  assert_output --partial "hexo-cli: 1."
+  assert_output --partial "3"
 }
 @test "when full identity: rsync is installed" {
   cd ${test_ide_work}
