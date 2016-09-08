@@ -1,13 +1,10 @@
 # From the just built image which has ide configs already installed.
 FROM hexoide_configs:temp
 
+COPY package.json /home/ide/node/
+
 # For Hexo blog
-RUN apk add --no-cache nano rsync && npm install hexo-cli -g &&\
-  npm install hexo-deployer-rsync --save &&\
-  npm install hexo-html-minifier --save &&\
-  npm install hexo-clean-css --save &&\
-  npm install hexo-uglify --save &&\
-  npm install hexo-generator-category --save &&\
-  npm install hexo-generator-index --save &&\
-  npm install hexo-generator-archive --save &&\
-  npm install hexo-generator-tag --save
+RUN apk add --no-cache nano rsync &&\
+  chown ide:ide -R /home/ide/node &&\
+  npm install hexo-cli -g &&\
+  sudo -E -H -u ide /bin/bash -lc "cd /home/ide/node/ && npm install --save-exact"

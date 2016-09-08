@@ -44,3 +44,7 @@ fi
 # this docker image.
 touch "${ide_home}/.profile"
 echo "cd ${ide_work}" > "${ide_home}/.profile"
+
+if [[ -d "${ide_home}/node/node_modules" ]]; then
+  ln -s "${ide_home}/node/node_modules" "${ide_work}/node_modules"
+fi
