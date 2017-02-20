@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'test-kitchen'
 gem 'kitchen-docker_cli'
-gem 'rake'
+gem 'rake', '11.2.2'
 gem 'rspec'
 
 ### AI-Traders private gems
@@ -14,5 +14,4 @@ source 'http://gems.ai-traders.com/' do
   gem 'dockerimagerake'
 end
 
-# to avoid Gem::InstallError: buff-extensions requires Ruby version >= 2.2.0
-gem 'buff-extensions', '<2.0.0'
+gem 'nokogiri', '1.6.8' # already installed in ai_ideide

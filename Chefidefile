@@ -1,3 +1,3 @@
 IDE_DRIVER=docker
-IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/chefide:0.3.2"
+IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/chefdkdockeride:0.1.1_warm"
 IDE_DOCKER_OPTIONS="--privileged -v /etc/default/docker:/etc/default/docker"
