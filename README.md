@@ -13,9 +13,9 @@ IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/hexoide:latest"
 ```bash
 ide
 ide npm exec hexo --version
-ide npm exec hexo init
-ide npm exec hexo generate
-ide npm exec hexo deploy
+# if declared in package.json like this: "generate": "hexo generate"
+# under section "scripts":
+ide npm run generate
 ```
 
 By default, current directory in docker container is `/ide/work`.
