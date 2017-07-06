@@ -10,7 +10,8 @@ COPY package.json /ide/work/
 # * generate node_modules with current dir /ide/work, because when I tried symlinking
 #  `ln -s /home/ide/node_modules /ide/work/node_modules` I got on `npm install`:
 #  "error Maximum call stack size exceeded".
-RUN apk add --no-cache nano rsync &&\
+RUN apk add --no-cache nano rsync
+RUN apk add --no-cache autoconf &&\
   chown ide:ide -R /ide/work &&\
   sudo -E -H -u ide /bin/bash -lc "cd /ide/work/ && npm install" &&\
   mv /ide/work/node_modules /home/ide/node_modules &&\
