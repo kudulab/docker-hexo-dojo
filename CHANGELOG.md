@@ -1,3 +1,8 @@
+### 0.1.4 (2017-Jul-06)
+
+* do not copy node_modules if already exist in /ide/work #10698
+* do not use ruby for development; use releaser and docker-ops instead
+
 ### 0.1.3 (20 Feb 2017)
 
 * ensure the `node_modules` directory is owned by ide

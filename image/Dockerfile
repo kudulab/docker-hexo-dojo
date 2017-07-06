@@ -1,6 +1,7 @@
 # From the just built image which has ide configs already installed.
-FROM hexoide_configs:temp
+FROM docker-registry.ai-traders.com/hexoide:temp
 
+# temporary only, used below
 COPY package.json /ide/work/
 
 # For Hexo blog

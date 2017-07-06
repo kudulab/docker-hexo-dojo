@@ -1,8 +1,5 @@
-**/.kitchen
-**/imagerc*
-**/*.html
-**/real_identity/**
-
-ide/work/bats/
-bats-support/
-bats-assert/
+releaser
+docker-ops
+imagerc*
+Idefile.to_be_tested*
+node_modules
