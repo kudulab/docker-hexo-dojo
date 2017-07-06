@@ -3,3 +3,4 @@ docker-ops
 imagerc*
 Idefile.to_be_tested*
 node_modules
+db.json

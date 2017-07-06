@@ -42,9 +42,17 @@ if [ -f "${ide_identity}/.gitconfig" ]; then
   cp "${ide_identity}/.gitconfig" "${ide_home}"
 fi
 
-# Not obligatory file; in order to ensure that after bash login, the ide user
-# is in /ide/work. Not obligatory but shortens end user's commands.
-# Do not copy it from $ide_identity, because it may reference sth not installed in
-# this docker image.
+# Ensure that after bash login:
+# * ide user is in /ide/work
+# * makes bashrc sourced for not-interactive (but login) shell
 touch "${ide_home}/.profile"
-echo "cd ${ide_work}" > "${ide_home}/.profile"
+echo "
+# if running bash
+if [ -n \"\$BASH_VERSION\" ]; then
+    # include .bashrc if it exists
+    if [ -f \"\$HOME/.bashrc\" ]; then
+	. \"\$HOME/.bashrc\"
+    fi
+fi
+cd \"\${ide_work}\"
+" > "${ide_home}/.profile"

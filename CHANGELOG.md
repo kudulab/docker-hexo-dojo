@@ -1,7 +1,8 @@
 ### 0.1.4 (2017-Jul-06)
 
-* do not copy node_modules if already exist in /ide/work #10698
 * do not use ruby for development; use releaser and docker-ops instead
+* `hexo --version` and similar commands are now directly invocable by ide user
+* fixed to not copy node_modules directory if it exists #10698
 
 ### 0.1.3 (20 Feb 2017)
 

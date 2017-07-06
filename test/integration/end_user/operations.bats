@@ -11,26 +11,41 @@ load '/opt/bats-assert/load.bash'
   refute_output "root"
   assert_equal "$status" 0
 }
+@test "PATH is set correctly" {
+  run /bin/bash -c "ide --idefile Idefile.to_be_tested \"env | grep PATH\""
+  # this is printed on test failure
+  echo "output: $output"
+  assert_line --partial "/home/ide/hexoide-yarn/node_modules/.bin"
+  assert_equal "$status" 0
+}
 @test "has node installed and it is invocable" {
   run /bin/bash -c "ide --idefile Idefile.to_be_tested \"node --version\""
   # this is printed on test failure
   echo "output: $output"
-  assert_line --partial "v6.5.0"
+  assert_line --partial "v6.9.5"
   assert_equal "$status" 0
 }
 @test "has npm installed and it is invocable" {
   run /bin/bash -c "ide --idefile Idefile.to_be_tested \"npm --version\""
   # this is printed on test failure
   echo "output: $output"
-  assert_line --partial "3.10.6"
+  assert_line --partial "3.10.10"
+  assert_equal "$status" 0
+}
+@test "clean before" {
+  run /bin/bash -c "ide --idefile Idefile.to_be_tested \"rm -rf node_modules\""
   assert_equal "$status" 0
 }
 @test "hexo is installed" {
-  # without the "npm config set color false" assert fails
-  run /bin/bash -c "ide --idefile Idefile.to_be_tested \"npm exec hexo --version\""
+  run /bin/bash -c "ide --idefile Idefile.to_be_tested \"hexo --version\""
   # this is printed on test failure
   echo "output: $output"
-  assert_line --partial "3"
+  assert_line --partial "hexo-cli: 1.0.3"
+  assert_line --partial "node: 6.9.5"
+  assert_equal "$status" 0
+}
+@test "clean after" {
+  run /bin/bash -c "ide --idefile Idefile.to_be_tested \"rm -rf node_modules\""
   assert_equal "$status" 0
 }
 @test "rsync is installed" {

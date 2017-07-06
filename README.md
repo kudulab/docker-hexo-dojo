@@ -12,10 +12,7 @@ IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/hexoide:latest"
 3. Run, example commands:
 ```bash
 ide
-ide npm exec hexo --version
-# if declared in package.json like this: "generate": "hexo generate"
-# under section "scripts":
-ide npm run generate
+ide hexo --version
 ```
 
 By default, current directory in docker container is `/ide/work`.
@@ -44,8 +41,6 @@ Those files are used inside gitide docker image:
 1. In a feature branch:
 * you make changes
 * and run tests:
-    * `./tasks build_cfg`
-    * `./tasks test_cfg`
     * `./tasks build`
     * `./tasks itest`
 1. You decide that your changes are ready and you:
