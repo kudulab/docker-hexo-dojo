@@ -2,7 +2,7 @@
 
 set -e
 if [[ ! -f ./releaser ]];then
-  wget --quiet http://http.archive.ai-traders.com/releaser/1.0.0/releaser
+  wget --quiet http://http.archive.ai-traders.com/releaser/1.0.3/releaser
 fi
 source ./releaser
 if [[ ! -f ./docker-ops ]];then
@@ -13,9 +13,6 @@ source ./docker-ops
 releaser_init
 
 image_name="docker-registry.ai-traders.com/hexoide"
-# since this task may happen directly on workstation/go-agent,
-# let's name the image differently to other temp images
-tmp_image="${image_name}:temp"
 image_dir="./image"
 imagerc_filename="imagerc"
 

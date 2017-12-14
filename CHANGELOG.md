@@ -1,3 +1,7 @@
+### 0.1.5 (2017-Dec-14)
+
+* use `docker-registry.ai-traders.com/node-ide:0.1.5` as base image #12143
+
 ### 0.1.4 (2017-Jul-06)
 
 * do not use ruby for development; use releaser and docker-ops instead

@@ -41,18 +41,3 @@ IdentityFile ${ide_home}/.ssh/id_rsa
 if [ -f "${ide_identity}/.gitconfig" ]; then
   cp "${ide_identity}/.gitconfig" "${ide_home}"
 fi
-
-# Ensure that after bash login:
-# * ide user is in /ide/work
-# * makes bashrc sourced for not-interactive (but login) shell
-touch "${ide_home}/.profile"
-echo "
-# if running bash
-if [ -n \"\$BASH_VERSION\" ]; then
-    # include .bashrc if it exists
-    if [ -f \"\$HOME/.bashrc\" ]; then
-	. \"\$HOME/.bashrc\"
-    fi
-fi
-cd \"\${ide_work}\"
-" > "${ide_home}/.profile"
