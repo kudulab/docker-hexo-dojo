@@ -1,3 +1,8 @@
+### 0.1.6 (2017-Dec-15)
+
+* fix task: build, get docker image version from changelog to allow reproducible
+ builds
+
 ### 0.1.5 (2017-Dec-14)
 
 * use `docker-registry.ai-traders.com/node-ide:0.1.5` as base image #12143
