@@ -1,6 +1,6 @@
 format_version: 4
 pipelines:
-  docker-hexoide:
+  docker-hexo-dojo:
     group: blog
     label_template: "${git[:8]}"
     materials:
