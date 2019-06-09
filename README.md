@@ -1,54 +1,32 @@
-# docker-hexoide
+# docker-hexo-dojo
 
-[IDE](https://github.com/ai-traders/ide) docker image to work with
- [Hexo](https://hexo.io/) blog.
+[Dojo](https://github.com/ai-traders/dojo) docker image with [Hexo](https://hexo.io/) blog tools.
 
 ## Usage
-1. Install [IDE](https://github.com/ai-traders/ide)
-2. Provide an Idefile:
+1. Setup docker.
+2. Install [Dojo](https://github.com/ai-traders/dojo) binary.
+3. Provide a Dojofile:
 ```
-IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/hexoide:latest"
+DOJO_DOCKER_IMAGE="kudulab/hexo-dojo:1.0.0"
 ```
-3. Run, example commands:
+4. Create and enter the container by running `dojo` at the root of project.
 ```bash
-ide
-ide hexo --version
+dojo hexo --version
 ```
 
-By default, current directory in docker container is `/ide/work`.
+By default, current directory in docker container is `/dojo/work`.
 
-If you want to run this docker image without IDE entrypoint, run e.g.
-```bash
-docker run -ti --rm --entrypoint=/bin/bash docker-registry.ai-traders.com/hexoide:latest -c "/bin/bash"
-```
+## License
 
-### Configuration
-Those files are used inside gitide docker image:
+Copyright 2019 Ewa Czechowska, Tomasz Sętkowski
 
-1. `~/.ssh/config` -- will be generated on docker container start
-2. `~/.ssh/id_rsa` -- it must exist locally, because it is a secret
-2. `~/.gitconfig` -- if exists locally, will be copied
-3. `~/.profile` -- will be generated on docker container start, in
-   order to ensure current directory is `/ide/work`.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-## Development
-### Dependencies
-* Bash
-* Docker daemon
-* Ide
+    http://www.apache.org/licenses/LICENSE-2.0
 
-### Lifecycle
-1. In a feature branch:
-* you make changes
-* and run tests:
-    * `./tasks build`
-    * `./tasks itest`
-1. You decide that your changes are ready and you:
-* merge into master branch
-* run locally:
-  * `./tasks set_version` to set version in CHANGELOG and chart version files to
-  the version from OVersion backend
-  * e.g. `./tasks set_version 1.2.3` to set version in CHANGELOG and chart version
-   files and in OVersion backend to 1.2.3
-* push to master onto private git server
-1. CI server (GoCD) tests and releases.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and

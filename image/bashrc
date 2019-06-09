@@ -1,4 +1,4 @@
-PATH=$PATH:/home/ide/hexoide-yarn/node_modules/.bin
+PATH=$PATH:/home/dojo/hexoide-yarn/node_modules/.bin
 
 # If not running interactively, don't do anything
 case $- in

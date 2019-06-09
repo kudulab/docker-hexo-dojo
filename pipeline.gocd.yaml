@@ -1,19 +1,22 @@
+format_version: 4
 pipelines:
   docker-hexoide:
     group: blog
     label_template: "${git[:8]}"
     materials:
       git:
-        git: "git@git.ai-traders.com:blog/docker-hexoide.git"
-        branch: master
+        type: configrepo
         blacklist:
           - "**/*.md"
+    secure_variables:
+      VAULT_TOKEN: "AES:d3dQaj5pL5fqhLI2NaOeVQ==:9+9bkfBpWbLquGVChxZjZNChF7ZQz7SAQRVKrhGqgnw="
     stages:
       - build:
           clean_workspace: true
           jobs:
             docker_image:
-              elastic_profile_id: w.c1.m1024.e5
+              resources:
+                - docker_builder
               artifacts:
                 - build:
                     source: image/imagerc
@@ -28,12 +31,13 @@ pipelines:
                   command: /bin/bash
                   arguments:
                     - -c
-                    - ops_docker_push=true ./tasks build
+                    - ./tasks build
       - itest:
           clean_workspace: true
           jobs:
             end_user:
-              elastic_profile_id: w.c1.m1024.e5
+              resources:
+                - docker_builder
               tasks:
                 - fetch:
                     stage: build
@@ -50,7 +54,8 @@ pipelines:
           clean_workspace: true
           jobs:
             code:
-              elastic_profile_id: w.c1.m1024.e5
+              resources:
+                - docker_builder
               tasks:
                 - exec:
                     command: /bin/bash
@@ -61,7 +66,8 @@ pipelines:
           clean_workspace: true
           jobs:
             docker_image:
-              elastic_profile_id: w.c1.m1024.e5
+              resources:
+                - docker_builder
               tasks:
                 - fetch:
                     stage: build

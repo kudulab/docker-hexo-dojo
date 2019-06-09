@@ -1,7 +1,9 @@
 releaser
 docker-ops
 imagerc*
-Idefile.to_be_tested*
+Dojofile.to_be_tested*
 node_modules
 db.json
 package-lock.json
+ops/
+/Dojofile.sut
