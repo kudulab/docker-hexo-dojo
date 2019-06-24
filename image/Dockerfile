@@ -30,8 +30,8 @@ RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends\
   rsync
 
-COPY hexoide-yarn /home/dojo/hexoide-yarn
-RUN cd /home/dojo/hexoide-yarn && yarn && chown dojo:dojo -R /home/dojo/hexoide-yarn
+COPY hexo-dojo-yarn /home/dojo/hexo-dojo-yarn
+RUN cd /home/dojo/hexo-dojo-yarn && yarn && chown dojo:dojo -R /home/dojo/hexo-dojo-yarn
 
 # For Bash
 COPY bashrc /home/dojo/.bashrc

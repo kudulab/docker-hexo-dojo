@@ -1,4 +1,5 @@
 * fix security alert detected by Github: upgrade stringstream to version 0.0.6 or later
+* clean some ide remnants (now it is a dojo docker image)
 
 ### 1.0.0 (2019-Jun-06)
 Rewrite as dojo and for public usage.

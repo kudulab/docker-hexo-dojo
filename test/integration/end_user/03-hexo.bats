@@ -5,7 +5,7 @@ load '/opt/bats-assert/load.bash'
   run /bin/bash -c "dojo -c Dojofile.sut \"env | grep PATH\""
   # this is printed on test failure
   echo "output: $output"
-  assert_line --partial "/home/dojo/hexoide-yarn/node_modules/.bin"
+  assert_line --partial "/home/dojo/hexo-dojo-yarn/node_modules/.bin"
   assert_equal "$status" 0
 }
 @test "clean before" {
