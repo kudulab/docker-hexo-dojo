@@ -6,7 +6,6 @@ load '/opt/bats-assert/load.bash'
   # this is printed on test failure
   echo "output: $output"
   assert_output --partial "dojo init finished"
-  assert_output --partial "hexoide"
   refute_output --partial "root"
   assert_equal "$status" 0
 }
